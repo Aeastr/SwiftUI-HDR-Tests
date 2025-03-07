@@ -21,6 +21,7 @@ struct ContentView: View {
 struct HDRDemoView: View {
     let hdrImageName = "hdrSample" // Make sure this exists in your asset catalog
     let nonHdrImageName = "hdrSample" // A regular SDR image
+    @State private var showImages = true // New state variable, default is true
     
     var body: some View {
         ScrollView {
@@ -34,6 +35,10 @@ struct HDRDemoView: View {
                     .font(.caption)
                     .foregroundColor(.gray)
                     .multilineTextAlignment(.center)
+                    .padding(.horizontal)
+                
+                // Toggle for showing/hiding images
+                Toggle("Show Images", isOn: $showImages)
                     .padding(.horizontal)
                 
                 // EDR Headroom Monitor
@@ -56,97 +61,100 @@ struct HDRDemoView: View {
                 }
                 .padding()
                 
-                // Standard Non-HDR Image
-                VStack {
-                    Text("Standard (Non-HDR) Image")
-                        .font(.headline)
-                    
-                    if let uiImage = UIImage(named: nonHdrImageName) {
-                        Image(uiImage: uiImage)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(height: 200)
-                            .overlay(
-                                Text("Standard Dynamic Range")
-                                    .foregroundColor(.white)
-                                    .padding(6)
-                                    .background(Color.black.opacity(0.6))
-                                    .cornerRadius(4),
-                                alignment: .bottom
-                            )
-                    } else {
-                        Image(systemName: "photo")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(height: 200)
-                            .overlay(
-                                Text("Example non-HDR Image")
-                                    .foregroundColor(.white)
-                                    .padding(6)
-                                    .background(Color.black.opacity(0.6))
-                                    .cornerRadius(4),
-                                alignment: .bottom
-                            )
+                if showImages {
+                    // Standard Non-HDR Image
+                    VStack {
+                        Text("Standard (Non-HDR) Image")
+                            .font(.headline)
+                        
+                        if let uiImage = UIImage(named: nonHdrImageName) {
+                            Image(uiImage: uiImage)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(height: 200)
+                                .overlay(
+                                    Text("Standard Dynamic Range")
+                                        .foregroundColor(.white)
+                                        .padding(6)
+                                        .background(Color.black.opacity(0.6))
+                                        .cornerRadius(4),
+                                    alignment: .bottom
+                                )
+                        } else {
+                            Image(systemName: "photo")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(height: 200)
+                                .overlay(
+                                    Text("Example non-HDR Image")
+                                        .foregroundColor(.white)
+                                        .padding(6)
+                                        .background(Color.black.opacity(0.6))
+                                        .cornerRadius(4),
+                                    alignment: .bottom
+                                )
+                        }
                     }
-                }
-                .padding()
-                
-                // HDR Image
-                VStack {
-                    Text("HDR Image")
-                        .font(.headline)
+                    .padding()
                     
-                    if let uiImage = UIImage(named: hdrImageName) {
-                        Image(uiImage: uiImage)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(height: 200)
-                            .allowedDynamicRange(.constrainedHigh)
-                            .overlay(
-                                Text("HDR")
-                                    .foregroundColor(.white)
-                                    .padding(6)
-                                    .background(Color.black.opacity(0.6))
-                                    .cornerRadius(4),
-                                alignment: .bottom
-                            )
-                    } else {
-                        Text("HDR image not found")
-                            .foregroundColor(.red)
+                    // HDR Image Method 1
+                    VStack {
+                        Text("HDR Image Method 1")
+                            .font(.headline)
+                        
+                        if let uiImage = UIImage(named: hdrImageName) {
+                            Image(uiImage: uiImage)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(height: 200)
+                                .allowedDynamicRange(.constrainedHigh)
+                                .overlay(
+                                    Text("HDR")
+                                        .foregroundColor(.white)
+                                        .padding(6)
+                                        .background(Color.black.opacity(0.6))
+                                        .cornerRadius(4),
+                                    alignment: .bottom
+                                )
+                        } else {
+                            Text("HDR image not found")
+                                .foregroundColor(.red)
+                        }
                     }
-                }
-                .padding()
-                
-                // Same HDR image without HDR enabled
-                VStack {
-                    Text("HDR Image")
-                        .font(.headline)
+                    .padding()
                     
-                    if let uiImage = UIImage(named: hdrImageName) {
-                        Image(uiImage: uiImage)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(height: 200)
-                            .allowedDynamicRange(.constrainedHigh)
-                            .overlay(
-                                Text("HDR")
-                                    .foregroundColor(.white)
-                                    .padding(6)
-                                    .background(Color.black.opacity(0.6))
-                                    .cornerRadius(4),
-                                alignment: .bottom
-                            )
-                    } else {
-                        Text("HDR image not found")
-                            .foregroundColor(.red)
+                    // HDR Image Method 2
+                    VStack {
+                        Text("HDR Image Method 2")
+                            .font(.headline)
+                        
+                        if let uiImage = UIImage(named: hdrImageName) {
+                            Image(uiImage: uiImage)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(height: 200)
+                                .allowedDynamicRange(.constrainedHigh)
+                                .overlay(
+                                    Text("HDR")
+                                        .foregroundColor(.white)
+                                        .padding(6)
+                                        .background(Color.black.opacity(0.6))
+                                        .cornerRadius(4),
+                                    alignment: .bottom
+                                )
+                        } else {
+                            Text("HDR image not found")
+                                .foregroundColor(.red)
+                        }
                     }
+                    .padding()
                 }
-                .padding()
             }
             .padding()
         }
     }
 }
+
 
 // MARK: - EDR Headroom Monitor
 struct EDRView: View {
