@@ -53,11 +53,17 @@ struct HDRDemoView: View {
                 
                 // HDR Circle Demo
                 VStack {
-                    Text("HDR Glowing Circle")
+                    Text("HDR Glowing Circles")
                         .font(.headline)
-                    HDRCircleView(hdrMultiplier: 3.0) // Using higher value for more visible effect
-                        .frame(width: 150, height: 150)
-                        .allowedDynamicRange(.constrainedHigh)
+                    HStack{
+                        HDRCircleView(hdrMultiplier: 1.0)
+                        HDRCircleView(hdrMultiplier: 1.2)
+                        HDRCircleView(hdrMultiplier: 1.5)
+                        HDRCircleView(hdrMultiplier: 2.0)
+                    }
+                    .frame(height: 150)
+                    .padding(.horizontal, 20)
+                    .allowedDynamicRange(.constrainedHigh)
                 }
                 .padding()
                 
@@ -202,7 +208,6 @@ struct HDRCircleView: View {
         return ZStack {
             Circle()
                 .fill(Color(hdrColor))
-                .frame(width: 150, height: 150)
         }
     }
 }
