@@ -68,92 +68,91 @@ struct HDRDemoView: View {
                 .padding()
                 
                 if showImages {
-                    // Standard Non-HDR Image
-                    VStack {
-                        Text("Standard (Non-HDR) Image")
-                            .font(.headline)
+                    HStack{
+                        // Standard Non-HDR Image
+                        VStack {
+                            Text("Non-HDR")
+                                .font(.headline)
+                            
+                            if let uiImage = UIImage(named: nonHdrImageName) {
+                                Image(uiImage: uiImage)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(height: 200)
+                                    .overlay(
+                                        Text("SDR")
+                                            .foregroundColor(.white)
+                                            .padding(6)
+                                            .background(Color.black.opacity(0.6))
+                                            .cornerRadius(4),
+                                        alignment: .bottom
+                                    )
+                            } else {
+                                Image(systemName: "photo")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(height: 200)
+                                    .overlay(
+                                        Text("SDR")
+                                            .foregroundColor(.white)
+                                            .padding(6)
+                                            .background(Color.black.opacity(0.6))
+                                            .cornerRadius(4),
+                                        alignment: .bottom
+                                    )
+                            }
+                        }
                         
-                        if let uiImage = UIImage(named: nonHdrImageName) {
-                            Image(uiImage: uiImage)
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(height: 200)
-                                .overlay(
-                                    Text("Standard Dynamic Range")
-                                        .foregroundColor(.white)
-                                        .padding(6)
-                                        .background(Color.black.opacity(0.6))
-                                        .cornerRadius(4),
-                                    alignment: .bottom
-                                )
-                        } else {
-                            Image(systemName: "photo")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(height: 200)
-                                .overlay(
-                                    Text("Example non-HDR Image")
-                                        .foregroundColor(.white)
-                                        .padding(6)
-                                        .background(Color.black.opacity(0.6))
-                                        .cornerRadius(4),
-                                    alignment: .bottom
-                                )
+                        // HDR Image Method 1
+                        VStack {
+                            Text("HDR Method 1")
+                                .font(.headline)
+                            
+                            if let uiImage = UIImage(named: hdrImageName) {
+                                Image(uiImage: uiImage)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(height: 200)
+                                    .allowedDynamicRange(.constrainedHigh)
+                                    .overlay(
+                                        Text("HDR")
+                                            .foregroundColor(.white)
+                                            .padding(6)
+                                            .background(Color.black.opacity(0.6))
+                                            .cornerRadius(4),
+                                        alignment: .bottom
+                                    )
+                            } else {
+                                Text("HDR image not found")
+                                    .foregroundColor(.red)
+                            }
+                        }
+                        
+                        // HDR Image Method 2
+                        VStack {
+                            Text("HDR Method 2")
+                                .font(.headline)
+                            
+                            if let uiImage = UIImage(named: hdrImageName) {
+                                Image(uiImage: uiImage)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(height: 200)
+                                    .allowedDynamicRange(.constrainedHigh)
+                                    .overlay(
+                                        Text("HDR")
+                                            .foregroundColor(.white)
+                                            .padding(6)
+                                            .background(Color.black.opacity(0.6))
+                                            .cornerRadius(4),
+                                        alignment: .bottom
+                                    )
+                            } else {
+                                Text("HDR image not found")
+                                    .foregroundColor(.red)
+                            }
                         }
                     }
-                    .padding()
-                    
-                    // HDR Image Method 1
-                    VStack {
-                        Text("HDR Image Method 1")
-                            .font(.headline)
-                        
-                        if let uiImage = UIImage(named: hdrImageName) {
-                            Image(uiImage: uiImage)
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(height: 200)
-                                .allowedDynamicRange(.constrainedHigh)
-                                .overlay(
-                                    Text("HDR")
-                                        .foregroundColor(.white)
-                                        .padding(6)
-                                        .background(Color.black.opacity(0.6))
-                                        .cornerRadius(4),
-                                    alignment: .bottom
-                                )
-                        } else {
-                            Text("HDR image not found")
-                                .foregroundColor(.red)
-                        }
-                    }
-                    .padding()
-                    
-                    // HDR Image Method 2
-                    VStack {
-                        Text("HDR Image Method 2")
-                            .font(.headline)
-                        
-                        if let uiImage = UIImage(named: hdrImageName) {
-                            Image(uiImage: uiImage)
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(height: 200)
-                                .allowedDynamicRange(.constrainedHigh)
-                                .overlay(
-                                    Text("HDR")
-                                        .foregroundColor(.white)
-                                        .padding(6)
-                                        .background(Color.black.opacity(0.6))
-                                        .cornerRadius(4),
-                                    alignment: .bottom
-                                )
-                        } else {
-                            Text("HDR image not found")
-                                .foregroundColor(.red)
-                        }
-                    }
-                    .padding()
                 }
             }
             .padding()
