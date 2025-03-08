@@ -67,6 +67,13 @@ struct HDRDemoView: View {
                 }
                 .padding()
                 
+                VStack {
+                    Text("HDR Glowing Circles (Vivid Method)")
+                        .font(.headline)
+                    
+                    VividCircleView()
+                }
+                
                 if showImages {
                     HStack{
                         // Standard Non-HDR Image
@@ -156,6 +163,8 @@ struct HDRDemoView: View {
                 }
             }
             .padding()
+            
+            
         }
     }
 }
